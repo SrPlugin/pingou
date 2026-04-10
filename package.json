@@ -4,29 +4,40 @@
 	"type": "module",
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.11",
+		"@commitlint/cli": "^20.5.0",
+		"@commitlint/config-conventional": "^20.5.0",
 		"@types/bun": "latest",
-		"drizzle-kit": "^0.31.10"
+		"drizzle-kit": "^0.31.10",
+		"lint-staged": "^16.4.0"
 	},
 	"peerDependencies": {
 		"typescript": "^5"
 	},
-  "scripts": {
-    "start:prod": "bun run dist/index.js",
-    "start:dev": "bun --watch src/index.ts",
-    "build": "bun build ./src/index.ts ./src/**/*.ts --outdir ./dist --target bun",
-    "format:check": "biome check .",
-    "format:fix": "biome format --write .",
-    "lint": "biome lint --write .",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
-    "db:push": "drizzle-kit push"
-  },
+	"scripts": {
+		"start:prod": "bun run dist/index.js",
+		"start:dev": "bun --watch src/index.ts",
+		"build": "bun build ./src/index.ts ./src/**/*.ts --outdir ./dist --target bun",
+		"lint": "biome lint .",
+		"lint:fix": "biome lint . --write",
+		"format": "biome format . --write",
+		"format:check": "biome check .",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio",
+		"db:push": "drizzle-kit push",
+		"prepare": "bunx husky install"
+	},
 	"dependencies": {
 		"@types/pg": "^8.20.0",
 		"drizzle-orm": "^0.45.2",
 		"pg": "^8.20.0",
 		"seyfert": "^4.3.0"
 	},
-	"private": true
+	"private": true,
+	"lint-staged": {
+		"*.{ts,js,json}": [
+			"biome format --write",
+			"biome lint --write"
+		]
+	}
 }
