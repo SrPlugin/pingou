@@ -16,16 +16,17 @@
 	"scripts": {
 		"start:prod": "bun run dist/index.js",
 		"start:dev": "bun --watch src/index.ts",
-		"build": "bun build ./src/index.ts ./src/**/*.ts --outdir ./dist --target bun",
+		"build": "bun build ./src/index.ts --outdir ./dist --target bun",
 		"lint": "biome lint .",
 		"lint:fix": "biome lint . --write",
 		"format": "biome format . --write",
-		"format:check": "biome check .",
+		"format:check": "biome format .",
+		"check": "biome check .",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"db:push": "drizzle-kit push",
-		"prepare": "bunx husky install"
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@types/pg": "^8.20.0",
